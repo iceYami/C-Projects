@@ -1,32 +1,48 @@
+using System;
+
 class Program
-
 {
-static void Main()
+    static void Main(string[] args)
+    {
+        int n = 0;
 
-    {int n;
-    do
+        Console.Write("Inserta el número de elementos de Fibonacci a calcular: ");
+        string input = Console.ReadLine();
 
-     {Console.Write("Introduce un número entero entre 7 y 22: ");
-      n = Convert.ToInt32(Console.ReadLine());} while (n < 7 || n > 22);
+        if (int.TryParse(input, out n) && n >= 0)
+        {
+           
+            int[] fibonacci = new int[n];
+            if (n > 0) fibonacci[0] = 0; 
 
-        int a = 0, b = 1;
-        Console.WriteLine("Secuencia de Fibonacci:");
+            if (n > 1) fibonacci[1] = 1; 
 
-        for (int i = 0; i < n; i++)
+            for (int i = 2; i < n; i++)
+            {
+                fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2]; 
+            }
 
-        {Console.Write(a + " ");
-            int temp = a;
-            a = b;
-            b = temp + b;}
+            Console.WriteLine("Secuencia de Fibonacci:");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write(fibonacci[i] + " ");
+            }
+            Console.WriteLine(); 
 
-        Console.WriteLine();
+            Console.WriteLine("Secuencia de Fibonacci invertida:");
+            for (int i = n - 1; i >= 0; i--)
+            {
+                Console.Write(fibonacci[i] + " ");
+            }
+            Console.WriteLine(); 
+        }
 
-        Console.WriteLine("Fibonacci reverse:");
+        Console.WriteLine("Escribe 'exit' para salir:");
+        string exitCommand = Console.ReadLine();
 
-        for (int i = n - 1; i >= 0; i--)
-        {Console.Write((i == 0 ? 0 : (i == 1 ? 1 : (b - a))) + " ");
-            int temp = a;
-            a = b;
-            b = temp + b;}
-
-        Console.WriteLine();}
+        if (exitCommand.ToLower() == "exit")
+        {
+            return; 
+        }
+    }
+}
